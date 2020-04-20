@@ -10,7 +10,7 @@ ADD ./src/ $HOME/
 
 RUN cd $HOME/ && \
     chmod +x vnc_startup.sh && \
-    chown vncuser:vncuser vnc_startup.sh
+    chown vncuser vnc_startup.sh
     
 EXPOSE 6080
 
