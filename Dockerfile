@@ -16,5 +16,5 @@ EXPOSE 6080
 
 USER vncuser
 
-ENTRYPOINT ["$HOME/vnc_startup.sh"]
+ENTRYPOINT ["/home/vncuser/vnc_startup.sh"]
 CMD ["--wait"]
