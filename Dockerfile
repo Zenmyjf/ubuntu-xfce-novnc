@@ -8,12 +8,14 @@ RUN apt update && \
 RUN apt clean -y
 
 ADD ./src/ $HOME/
-RUN chmod +x vnc_startup.sh && \
+
+RUN cd $HOME/ && \
+    chmod +x vnc_startup.sh && \
     chown vncuser:vncuser vnc_startup.sh
+    
+EXPOSE 6080
 
 USER vncuser
-
-EXPOSE 6080
 
 ENTRYPOINT ["$HOME/vnc_startup.sh"]
 CMD ["--wait"]
