@@ -1,7 +1,6 @@
 FROM kingma/ubuntu-xfce-novnc:base
 
-MAINTAINER Marvell "kingwinma@gmail.com"
-ENV REFRESHED_AT 2020-04-21
+ENV HOME=/home/vncuser
 
 RUN apt update && \
     apt install -y firefox
