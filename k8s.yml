@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: king-desk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: king-desk
+  template:
+    metadata:
+      labels:
+        app: king-desk
+    spec:
+      containers:
+      - image: kingma/ubuntu-xfce-novnc:v1
+        name: king-desk
+        ports:
+        - containerPort: 6080
+
+------------------
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: king-desk
+  annotations:
+    dev.okteto.com/auto-ingress: "true"
+  labels:
+    app: king-desk
+spec:
+  type: ClusterIP  
+  ports:
+  - name: "king-desk-port"
+    port: 6080
+  selector:
+    app: king-desk
