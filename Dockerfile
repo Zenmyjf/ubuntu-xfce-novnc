@@ -1,6 +1,7 @@
 FROM kingma/ubuntu-xfce-novnc:base
 
 ENV HOME=/home/vncuser
+WORKDIR $HOME
 
 RUN apt update && \
     apt install -y firefox
@@ -8,9 +9,7 @@ RUN apt clean -y
 
 ADD ./src/ $HOME/
 
-RUN cd $HOME/ && \
-    chmod +x vnc_startup.sh && \
-    chown vncuser vnc_startup.sh
+RUN chmod 777 $HOME/vnc_startup.sh
     
 EXPOSE 6080
 
