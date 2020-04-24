@@ -6,6 +6,7 @@ set -e
 export HOME=/home/vncuser
 export NO_VNC_HOME=/home/vncuser/noVNC
 export LOG_HOME=/home/vncuser
+export DISPLAY=:1
 export VNC_PORT=5901
 export NO_VNC_PORT=6080
 export VNC_COL_DEPTH=24
