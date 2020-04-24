@@ -1,0 +1,43 @@
+FROM ubuntu:latest for base
+
+RUN apt update
+##Install tools
+RUN apt install -y apt-utils vim wget net-tools locales bzip2 lzip curl iputils-ping \
+    sudo gnupg2 iproute2 ntp \
+    python-numpy ##used for websockify/novnc
+RUN ln -s /usr/bin/python2.7 /usr/bin/python
+
+##Install xfce4
+RUN apt install -y xfce4 xfce4-terminal xterm xfce4-goodies
+
+##Install custom fonts
+RUN apt install -y ttf-wqy-zenhei
+
+##Cleaning system
+RUN apt purge -y pm-utils xscreensaver* && \
+    apt clean -y && \
+    rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man* /tmp/* /var/tmp/*
+
+##generate locales and language
+RUN locale-gen en_US.UTF-8
+
+####################################################################################
+
+FROM base as beta
+
+##Install vncserver and config
+RUN wget -qO- https://dl.bintray.com/tigervnc/stable/tigervnc-1.10.1.x86_64.tar.gz | tar xz --strip 1 -C /
+
+##Add user and config
+RUN useradd vncuser -g sudo -m 
+RUN su - vncuser && \
+    mkdir .vnc
+ADD ./xst/ /home/vncuser/.vnc/
+RUN chmod +x /home/vncuser/.vnc/xstartup && chown vncuser /home/vncuser/.vnc/xstartup
+
+##Install noVNC
+RUN cd /home/vncuser && \
+    mkdir -p noVNC/utils/websockify && \
+    wget -qO- https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz | tar xz --strip 1 -C /home/vncuser/noVNC/ && \
+    wget -qO- https://github.com/novnc/websockify/archive/v0.9.0.tar.gz | tar xz  --strip 1 -C /home/vncuser/noVNC/utils/websockify && \
+    ln -s /home/vncuser/noVNC/vnc.html /home/vncuser/noVNC/index.html
