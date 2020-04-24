@@ -1,19 +1,11 @@
-FROM kingma/ubuntu-xfce-novnc:base
+FROM kingma/ubuntu-xfce-vnc:beta
 
-ENV HOME=/home/vncuser
-WORKDIR $HOME
+MAINTAINER Marvell "kingwinma@gmail.com"
+ENV REFRESHED_AT 2020-04-24
 
-RUN apt update && \
-    apt install -y firefox
-RUN apt clean -y
+ADD ./src/ /home/vncuser/
+RUN chmod +x /home/vncuser/startup.sh
 
-ADD ./src/ $HOME/
+EXPOSE 8080
 
-RUN chmod 777 $HOME/vnc_startup.sh
-    
-EXPOSE 6080
-
-USER vncuser
-
-ENTRYPOINT ["/home/vncuser/vnc_startup.sh"]
-CMD ["--wait"]
+CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
