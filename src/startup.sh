@@ -12,11 +12,11 @@ export DEBUG=false
 
 ## start vncserver and noVNC webclient
 echo "\n------------------ start noVNC  ----------------------------"
-nohup sh $NO_VNC_HOME/utils/launch.sh --vnc localhost:$VNC_PORT --listen $NO_VNC_PORT & > $LOG_HOME/no_vnc_startup.log 
+$NO_VNC_HOME/utils/launch.sh --vnc localhost:$VNC_PORT --listen $NO_VNC_PORT & > $LOG_HOME/no_vnc_startup.log 
 
 echo "\n------------------ start VNC server ------------------------"
 echo "start vncserver with param: VNC_COL_DEPTH=$VNC_COL_DEPTH, VNC_RESOLUTION=$VNC_RESOLUTION\n..."
-nohup vncserver :1 -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION & > $LOG_HOME/vnc_startup.log
+vncserver :1 -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION & > $LOG_HOME/vnc_startup.log
 
 ## log connect options
 echo -e "\n\n------------------ VNC environment started ------------------"
