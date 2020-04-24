@@ -15,10 +15,6 @@ echo "\n------------------ start noVNC  ----------------------------"
 nohup sh $NO_VNC_HOME/utils/launch.sh --vnc localhost:$VNC_PORT --listen $NO_VNC_PORT & > $LOG_HOME/no_vnc_startup.log 
 
 echo "\n------------------ start VNC server ------------------------"
-echo "remove old vnc locks to be a reattachable container"
-nohup vncserver -kill :1 & > $LOG_HOME/vnc_startup.log \
-    || rm -rfv /tmp/.X*-lock /tmp/.X11-unix &> $LOG_HOME/vnc_startup.log 
-
 echo "start vncserver with param: VNC_COL_DEPTH=$VNC_COL_DEPTH, VNC_RESOLUTION=$VNC_RESOLUTION\n..."
 nohup vncserver :1 -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION & > $LOG_HOME/vnc_startup.log
 
