@@ -13,10 +13,10 @@ spec:
         app: king-desk
     spec:
       containers:
-      - image: dorowu/ubuntu-desktop-lxde-vnc:latest
+      - image: kingma/ubuntu-xfce-vnc:latest
         name: king-desk
         ports:
-        - containerPort: 80
+        - containerPort: 8080
 
 ------------------
 
@@ -32,6 +32,6 @@ spec:
   type: ClusterIP  
   ports:
   - name: "king-desk-port"
-    port: 6080
+    port: 8080
   selector:
     app: king-desk
