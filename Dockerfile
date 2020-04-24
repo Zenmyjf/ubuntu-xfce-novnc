@@ -7,5 +7,7 @@ ADD ./src/ /home/vncuser/
 RUN chmod +x /home/vncuser/startup.sh && chown vncuser /home/vncuser/startup.sh
 
 EXPOSE 6080
+USER vncuser
 
-CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
+ENTRYPOINT ["/home/vncuser/startup.sh"]
+CMD ["--wait"]
