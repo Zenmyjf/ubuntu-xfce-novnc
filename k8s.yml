@@ -16,7 +16,7 @@ spec:
       - image: kingma/ubuntu-xfce-vnc:latest
         name: king-desk                
         ports:
-        - containerPort: 8080
+        - containerPort: 6080
         resources: 
           limits:
             memory: "4Gi"
@@ -34,6 +34,6 @@ spec:
   type: ClusterIP  
   ports:
   - name: "king-desk-port"
-    port: 8080
+    port: 6080
   selector:
     app: king-desk
