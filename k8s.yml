@@ -13,7 +13,7 @@ spec:
         app: king-desk
     spec:
       containers:
-      - image: kingma/ubuntu-xfce-vnc:latest
+      - image: kingma/ubuntu-xfce-vnc:k8stest
         name: king-desk                
         ports:
         - containerPort: 6080
