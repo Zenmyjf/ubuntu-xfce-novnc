@@ -17,7 +17,7 @@ export DEBUG=false
 help (){
 echo "
 USAGE:
-docker run -it -p 6080:6901 -p 5901:5901 kingma/<image>:<tag> <option>
+docker run -it -p 6080:5901 kingma/<image>:<tag> <option>
 
 IMAGES:
 kingma/ubuntu-xfce-vnc
